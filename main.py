@@ -17,7 +17,8 @@ def main():
         try:
             with nfc.ContactlessFrontend('usb') as clf:
                 logging.info("Waiting")
-                clf.connect(rdwr={'on-connect': on_connect})
+                while True:
+                    clf.connect(rdwr={'on-connect': on_connect})
         except Exception as e:
             logging.error(f"NFC Error: {e}")
             time.sleep(5)
