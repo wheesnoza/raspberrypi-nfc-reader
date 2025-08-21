@@ -1,0 +1,15 @@
+services:
+  server:
+    container_name: iot-server
+    build:
+      context: .
+      target: dev
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./src:/app/src:delegated
+      - /app/node_modules
+    command: npm run dev
+    restart: unless-stopped
