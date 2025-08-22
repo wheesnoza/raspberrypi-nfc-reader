@@ -3,6 +3,7 @@ services:
     container_name: iot-server
     build:
       context: .
+      dockerfile: .docker/node/Dockerfile
       target: dev
     ports:
       - "3000:3000"
@@ -13,3 +14,20 @@ services:
       - /app/node_modules
     command: npm run dev
     restart: unless-stopped
+    depends_on:
+      - emulator
+  
+  emulator:
+    container_name: iot-emulator
+    build:
+      context: .
+      dockerfile: .docker/emulator/Dockerfile
+    volumes:
+      - ./firebase.json:/workspace/firebase.json:ro
+      - ./firestore.rules:/workspace/firestore.rules:ro
+      - ./firestore.indexes.json:/workspace/firestore.indexes.json:ro
+      - ./.firestore-data:/workspace/.firestore-data
+    ports:
+      - "8080:8080"   # Firestore
+      - "4000:4000"   # Emulator UI
+      - "4400:4400"   # Emulator Hub

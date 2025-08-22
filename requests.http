@@ -1,0 +1,15 @@
+@host = http://localhost:3000
+@token = dev-token-123
+
+### Health check
+GET {{host}}/health
+
+### Scan
+POST {{host}}/scan
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "uid": "ABCD1234EF56",
+  "timestamp": "{{$datetime 'YYYY-MM-DD HH:mm:ss'}}"
+}

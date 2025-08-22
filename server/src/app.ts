@@ -29,7 +29,7 @@ export function createApp() {
     res.status(200).json({ status: "ok", uptime: process.uptime() });
   });
 
-  app.post("/api/scan", (req, res) => {
+  app.post("/scan", (req, res) => {
     console.log(req.body)
     res.status(201).json({status: "ok", uptime: process.uptime() });
   });
