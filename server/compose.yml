@@ -24,6 +24,7 @@ services:
       dockerfile: .docker/emulator/Dockerfile
     volumes:
       - ./firebase.json:/workspace/firebase.json:ro
+      - ./.firebaserc:/workspace/.firebaserc:ro
       - ./firestore.rules:/workspace/firestore.rules:ro
       - ./firestore.indexes.json:/workspace/firestore.indexes.json:ro
       - ./.firestore-data:/workspace/.firestore-data
