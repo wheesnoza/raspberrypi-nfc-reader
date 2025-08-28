@@ -5,11 +5,11 @@
 GET {{host}}/health
 
 ### Scan
-POST {{host}}/scan
+POST {{host}}/device/read
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "uid": "ABCD1234EF56",
-  "timestamp": "{{$datetime 'YYYY-MM-DD HH:mm:ss'}}"
+  "device_uid": "ABCD1234EF56",
+  "read_at": "{{$datetime 'YYYY-MM-DD HH:mm:ss'}}"
 }
