@@ -1,7 +1,7 @@
-import { Kind, KindType } from "@/lib/firestore";
+import { Kind, type KindType } from "@/lib/firestore";
 
 export const nextKind = (previous: KindType | null): KindType => {
-    if (previous === Kind.In) return Kind.Out;
+  if (previous === Kind.In) return Kind.Out;
 
-    return Kind.In;
-}
+  return Kind.In;
+};
