@@ -12,7 +12,7 @@
     "lint": "biome lint .",
     "format": "biome format . --write",
     "check": "biome check .",
-    "fix": "biome check . --apply"
+    "fix": "biome check . --write"
   },
   "dependencies": {
     "@google-cloud/firestore": "7.9.0",
