@@ -17,11 +17,12 @@ logging.basicConfig(
 
 def on_connect(tag):
     device_uid = tag.identifier.hex().upper()
-    read_at = datetime.now(JST).strftime("%Y-%m-%d %H:%M:%S")
+    read_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     logging.info(f"Card Detected: UID={ device_uid }")
 
     try:
+        logging.info(f"POST {POST_URL}")
         response = requests.post(POST_URL, json={ "device_uid": device_uid, "read_at": read_at }, timeout=5)
         logging.info(f"POST {POST_URL} status={response.status_code}")
     except Exception as e:
