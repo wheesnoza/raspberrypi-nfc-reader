@@ -1,7 +1,14 @@
-# main.py
 import nfc
 import logging
 import time
+import os
+import requests
+from datetime import datetime
+
+POST_URL = os.getenv("POST_URL")
+
+if not POST_URL:
+    raise ValueError("POST_URL required.")
 
 logging.basicConfig(
     level=logging.INFO,
@@ -9,7 +16,17 @@ logging.basicConfig(
 )
 
 def on_connect(tag):
-    logging.info(f"Card Detected: UID={tag.identifier.hex().upper()}")
+    device_uid = tag.identifier.hex().upper()
+    read_at = datetime.now()
+
+    logging.info(f"Card Detected: UID={ device_uid }")
+
+    try:
+        response = requests.post(POST_URL, json={ device_uid, read_at }, timeout=5)
+        logging.info(f"POST {POST_URL} status={response.status_code}")
+    except Exception as e:
+        logging.error(f"HTTP POST Error: {e}")
+
     return True
 
 def main():
